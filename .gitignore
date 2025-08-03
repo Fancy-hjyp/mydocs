@@ -1,0 +1,7 @@
+# Ignore public directory
+public/
+
+# Other ignore rules
+.DS_Store
+.hugo_build.lock
+resources/
