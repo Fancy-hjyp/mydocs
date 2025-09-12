@@ -44,7 +44,7 @@ theme = "hugo-book"
   # 正确嵌套二级菜单项
   [[menu.main.children]]
     name = "MyBatis"
-    url = "/rd/MyBatis/"
+    url = "/rd/MyBatis教程/"
     weight = 1
   [[menu.main.children]]
     name = "MySQL"
