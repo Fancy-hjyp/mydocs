@@ -3,7 +3,6 @@ title: MyBatis 概念
 description: MyBatis 概念详解
 tags: [MyBatis]
 date: 2025-08-03
-categories: [MyBatis]
 weight: 1
 type: docs
 ---

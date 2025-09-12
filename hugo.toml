@@ -41,6 +41,15 @@ theme = "hugo-book"
   name = "RD"
   url = "/rd/"
   weight = 2
+  # 正确嵌套二级菜单项
+  [[menu.main.children]]
+    name = "MyBatis"
+    url = "/rd/MyBatis/"
+    weight = 1
+  [[menu.main.children]]
+    name = "MySQL"
+    url = "/rd/MySQL/"
+    weight = 2
 
 # Needed for mermaid/katex shortcodes
 [markup]
