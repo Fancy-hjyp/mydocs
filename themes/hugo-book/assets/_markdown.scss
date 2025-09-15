@@ -1,0 +1,174 @@
+@import "variables";
+
+.markdown {
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 0.95em;
+
+  // remove padding at the beginning of page
+  > :first-child {
+    margin-top: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 1.5em;
+    margin-bottom: $padding-16;
+
+    a.anchor {
+      opacity: 0;
+      font-size: 0.75em;
+      vertical-align: middle;
+      text-decoration: none;
+    }
+
+    &:hover a.anchor,
+    a.anchor:focus {
+      opacity: initial;
+    }
+  }
+
+  h1 {
+    font-size: 2em;
+    border-bottom: 1px solid var(--gray-300);
+    padding-bottom: $padding-8;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--gray-300);
+    padding-bottom: $padding-8;
+  }
+
+  h3 {
+    font-size: 1.25em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1em;
+  }
+
+  h6 {
+    font-size: 0.9em;
+  }
+
+  b,
+  optgroup,
+  strong {
+    font-weight: 600;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--color-link);
+
+    &:hover {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: var(--color-visited-link);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $border-radius;
+  }
+
+  code {
+    direction: ltr;
+    unicode-bidi: embed;
+    padding: 0 $padding-8;
+    background: var(--gray-200);
+    font-size: 0.875em;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+
+  p {
+    word-wrap: break-word;
+    margin: $padding-16 0;
+  }
+
+  blockquote {
+    margin: $padding-16 0;
+    padding: $padding-8 $padding-16 $padding-8 ($padding-16 - $padding-4); //to keep total left space 16dp
+    border-left: $padding-4 solid var(--gray-300);
+    background: var(--gray-100);
+    border-radius: 0 $border-radius $border-radius 0;
+
+    p:last-child {
+      margin: 0;
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: $padding-32;
+    margin: $padding-16 0;
+
+    li {
+      margin-bottom: $padding-8;
+      
+      > ul,
+      > ol {
+        margin-top: $padding-8;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  dl {
+    margin: $padding-16 0;
+    
+    dt {
+      font-weight: bold;
+      margin-top: $padding-16;
+    }
+    
+    dd {
+      margin-left: 0;
+      padding-left: $padding-16;
+    }
+  }
+
+  hr {
+    height: 1px;
+    border: none;
+    background: var(--gray-300);
+    margin: $padding-32 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: $padding-16 0;
+    overflow-x: auto;
+    display: block;
+
+    thead {
+      background: var(--gray-100);
+    }
+
+    td,
+    th {
+      padding: $padding-8 $padding-16;
+      border: 1px solid var(--gray-300);
+    }
+
+    tr:nth-child(2n) {
+      background: var(--gray-100);
+    }
+  }
+}

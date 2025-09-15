@@ -1,0 +1,13 @@
+/* You can override SASS variables here. */
+
+// @import "plugins/dark";
+
+/* 自定义变量示例 */
+/* 修改基础字体大小 */
+$font-size-base: 16px;
+
+/* 修改容器最大宽度 */
+$container-max-width: 90rem;
+
+/* 修改页面最小宽度以防止水平滚动条 */
+$body-min-width: 15rem;

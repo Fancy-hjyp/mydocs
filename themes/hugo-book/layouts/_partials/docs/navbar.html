@@ -1,0 +1,37 @@
+{{/* 
+  顶部导航栏模板
+  显示所有content目录下的一级目录作为导航项
+  如果一级目录下有二级目录，则显示为下拉菜单
+*/}}
+
+{{ $currentPage := . }}
+<nav class="book-navbar">
+  <a href="{{ .Site.BaseURL }}" class="book-navbar-brand">
+    <img src="{{ "svg/logo.svg" | relURL }}" class="book-navbar-logo" alt="Logo" />
+    <span>{{ .Site.Title }}</span>
+  </a>
+  
+  <ul class="book-navbar-list">
+    {{/* 使用Hugo菜单系统 */}}
+    {{ range .Site.Menus.main }}
+      {{ if .HasChildren }}
+        <li class="book-navbar-item dropdown{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}">
+          <a href="javascript:void(0)" class="flex">
+            {{ .Name }}
+          </a>
+          <ul class="book-navbar-submenu">
+            {{ range .Children }}
+              <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
+                <a href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+            {{ end }}
+          </ul>
+        </li>
+      {{ else }}
+        <li class="book-navbar-item{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}">
+          <a href="{{ .URL }}">{{ .Name }}</a>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</nav>

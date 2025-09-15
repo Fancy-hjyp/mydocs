@@ -1,0 +1,75 @@
+{{/* 重构：确保正确显示当前顶级 section 下的所有内容 */}}
+{{ define "book-siblings" }}
+  {{ $currentPage := .CurrentPage }}
+  {{ $currentSection := .CurrentSection }}
+  
+  {{/* 获取顶部导航栏选择的 section */}}
+  {{ $topSection := $currentSection.FirstSection }}
+  
+  <ul>
+    <li {{- if $topSection.Params.BookFlatSection }} class="book-section-flat" {{ end -}}>
+      {{ template "book-page-link" (dict "Page" $topSection "CurrentPage" $currentPage) }}
+      {{ template "book-section-children" (dict "Section" $topSection "CurrentPage" $currentPage) }}
+    </li>
+  </ul>
+{{ end }}
+
+{{ define "book-section-children" }}
+  {{ $section := .Section }}
+  {{ $currentPage := .CurrentPage }}
+  <ul>
+    {{ range (where $section.Pages "Params.bookHidden" "ne" true) }}
+      {{ if .IsSection }}
+        <li {{- if .Params.BookFlatSection }} class="book-section-flat" {{ end -}}>
+          {{ template "book-page-link" (dict "Page" . "CurrentPage" $currentPage) }}
+          {{ template "book-section-children" (dict "Section" . "CurrentPage" $currentPage) }}
+        </li>
+      {{ else if and .IsPage .Content }}
+        <li>
+          {{ template "book-page-link" (dict "Page" . "CurrentPage" $currentPage) }}
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+{{ end }}
+
+{{ define "book-page-link" }}
+  {{ $page := .Page }}
+  {{ $currentPage := .CurrentPage }}
+  {{ $current := eq $currentPage $page }}
+  {{ $ancestor := $page.IsAncestor $currentPage }}
+
+  {{ if $page.Params.BookCollapseSection }}
+    <input type="checkbox" id="section-{{ md5 $page }}" class="toggle" {{ if or $current $ancestor }}checked{{ end }} />
+    <label for="section-{{ md5 $page }}" class="flex">
+      <a {{ if $page.Content }}href="{{ $page.RelPermalink }}"{{ else }}role="button"{{ end }} class="flex-auto {{ if $current }}active{{ end }}">
+        {{- partial "docs/title" $page -}}
+      </a>
+    </label>
+  {{ else if $page.Params.BookHref }}
+    <a href="{{ $page.Params.BookHref }}" class="{{ if $current }}active{{ end }}" target="_blank" rel="noopener">
+      {{- partial "docs/title" $page -}}
+    </a>
+  {{ else if $page.Content }}
+    <a href="{{ $page.RelPermalink }}" class="{{ if $current }}active{{ end }}">
+      {{- partial "docs/title" $page -}}
+    </a>
+  {{ else }}
+    <span>{{- partial "docs/title" $page -}}</span>
+  {{ end }}
+{{ end }}
+
+{{/* 只有在未使用 BookSiblingMenu 时才渲染默认菜单 */}}
+{{ if not .Site.Params.BookSiblingMenu }}
+  {{ $bookSection := default "docs" .Site.Params.BookSection }}
+  {{ if eq $bookSection "*" }}
+    {{ $bookSection = "/" }}{{/* Backward compatibility */}}
+  {{ end }}
+
+  {{ with .Site.GetPage $bookSection }}
+    {{ template "book-section-children" (dict "Section" . "CurrentPage" $) }}
+  {{ end }}
+{{ else }}
+  {{/* 当启用 BookSiblingMenu 时，使用自定义的同级目录显示 */}}
+  {{ template "book-siblings" (dict "CurrentPage" . "CurrentSection" .CurrentSection) }}
+{{ end }}

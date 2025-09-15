@@ -1,0 +1,320 @@
+/* You can override SASS variables here. */
+// @import "plugins/dark";
+
+/* 自定义变量示例 */
+/* 修改基础字体大小 */
+$font-size-base: 16px;
+
+/* 修改容器最大宽度 */
+$container-max-width: 90rem;
+
+/* 修改页面最小宽度以防止水平滚动条 */
+$body-min-width: 20rem;
+
+.book-article-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--color-link);
+}
+
+/* 修改链接悬停效果 */
+a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* 增强链接交互效果 */
+a {
+  transition: all 0.3s ease;
+  color: #3498db;
+  
+  &:visited {
+    color: #551A8B; /* 紫色表示已访问链接 */
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+/* 修改代码块样式 */
+.markdown pre,
+.markdown code {
+  background: #f8f8f8 !important;   // 亮色背景
+  color: #222 !important;           // 深色字体
+  border: 1px solid #e0e0e0;
+  font-family: 'Fira Code', monospace; // 更现代的等宽字体
+  border-radius: 8px;
+}
+
+/* 增强代码块交互效果 */
+.markdown pre:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+
+.markdown pre {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+/* 修改表格样式 */
+.markdown table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1rem;
+  display: block; /* 表格设为块级元素 */
+  overflow-x: auto; /* 表格水平滚动 */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+/* 增强表格悬停效果 */
+.markdown table:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.markdown table th,
+.markdown table td {
+  border: 1px solid var(--gray-200);
+  padding: 0.5rem;
+  white-space: nowrap; /* 防止单元格内文字换行 */
+}
+
+.markdown table th {
+  background-color: var(--gray-100);
+}
+
+/* 顶部导航栏样式 - 现代化设计 */
+.book-navbar {
+  background: linear-gradient(135deg, #3498db, #2c80c5) !important; /* 更明亮的蓝色渐变 */
+  border-bottom: none;
+  padding: 0 1.5rem;
+  position: fixed; /* 改为fixed定位 */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* 增加z-index确保在最上层 */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center; /* 垂直居中对齐 */
+  min-height: 3.5rem; /* 降低高度 */
+  backdrop-filter: blur(10px); /* 毛玻璃效果 */
+
+  .book-navbar-brand {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600; /* 增加字体粗细 */
+    text-decoration: none;
+    letter-spacing: 0.5px; /* 字符间距 */
+    
+    .book-navbar-logo {
+      height: 1.5rem; /* 减小图标高度 */
+      width: 1.5rem; /* 减小图标宽度 */
+      margin-right: 1rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* 图标阴影 */
+    }
+  }
+
+  .book-navbar-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    /* 在导航栏品牌和菜单项之间添加自动间距 */
+    margin-left: auto;
+
+    .book-navbar-item {
+      position: relative;
+      margin: 0;
+
+      > a,
+      > span,
+      > label {
+        display: block;
+        padding: 0.8rem 1.2rem; /* 调整内边距 */
+        color: rgba(255, 255, 255, 0.95); /* 提高文字不透明度 */
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all 0.3s ease; /* 添加过渡效果 */
+        border-radius: 4px;
+        margin: 0.1rem 0.2rem; /* 调整外边距 */
+      }
+
+      > a:hover,
+      > label:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* 悬停效果 */
+        color: white;
+        transform: translateY(-1px); /* 轻微上移效果 */
+      }
+
+      &.active > a,
+      &.active > span,
+      &.active > label {
+        color: white;
+        font-weight: 600;
+        /* 为选中项添加底部白条 */
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background-color: white;
+          border-radius: 2px;
+        }
+      }
+
+      .book-navbar-submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: linear-gradient(135deg, #3498db, #2c80c5); /* 与主导航栏一致的渐变 */
+        min-width: 180px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        list-style: none;
+        margin: 0;
+        padding: 0.5rem;
+        z-index: 1000;
+        border-radius: 0 0 4px 4px;
+        transform-origin: top;
+        animation: submenuOpen 0.3s ease;
+
+        li {
+          margin: 0;
+
+          a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background-color: rgba(255, 255, 255, 0.2);
+              color: white;
+              padding-left: 1.5rem;
+            }
+          }
+
+          &.active a {
+            color: white;
+            font-weight: 600;
+            /* 为选中项添加底部白条 */
+            position: relative;
+            &::after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0.5rem;
+              right: 0.5rem;
+              height: 2px;
+              background-color: white;
+              border-radius: 1px;
+            }
+          }
+        }
+      }
+
+      &:hover .book-navbar-submenu {
+        display: block;
+      }
+      
+      /* 添加对新HTML结构的支持 */
+      a.flex:hover + .book-navbar-submenu {
+        display: block;
+      }
+    }
+  }
+}
+
+/* 包装器样式 */
+.book-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 主容器和相关区域 添加顶部边距 */
+main.container.flex {
+  margin-top: 3.5rem !important; /* 使用更具体的选择器和!important确保样式生效 */
+  max-width: 100% !important; /* 确保容器最大宽度为100% */
+  // justify-content: flex-start; /* 让子元素靠左对齐 */
+  // 两边对齐
+  justify-content: space-between;
+  gap: 2rem; /* 控制左右两侧内容之间的间距 */
+}
+
+.book-menu .book-menu-content {
+  width: 200px; /* 减少左侧导航栏的宽度 */
+  // padding-top: 1rem;
+  top: 3.5rem; /* 与导航栏高度一致 */
+  bottom: 0;      /* 底部与视口对齐 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 调整右侧目录栏，使其在导航栏下方开始显示且不超过容器界限 */
+.book-toc .book-toc-content {
+  top: 3.5rem;    /* 与导航栏高度一致 */
+  bottom: 0;      /* 底部与视口对齐 */
+}
+
+.book-toc .book-toc-content {
+  padding-top: 1rem;
+}
+
+/* 动画定义 */
+@keyframes submenuOpen {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* 移动端适配 */
+@media screen and (max-width: $mobile-breakpoint) {
+  .book-navbar {
+    padding: 0 1rem;
+    min-height: 3rem; /* 移动端更小的高度 */
+  }
+  
+  .book-navbar-brand {
+    font-size: 1.1rem;
+    
+    .book-navbar-logo {
+      height: 1.25rem; /* 移动端更小的图标 */
+      width: 1.25rem;
+      margin-right: 0.75rem;
+    }
+  }
+  
+  .book-navbar-item {
+    > a,
+    > span,
+    > label {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .book-wrapper {
+    padding-top: 3rem; /* 移动端调整padding-top值 */
+  }
+}
